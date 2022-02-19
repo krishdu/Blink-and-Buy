@@ -1,6 +1,7 @@
 const Product = require('../models/productModel');
 const { createCustomError } = require('../utils/errorHandler');
 const asyncWrapper = require('../middleware/asyncWrapper');
+const ApiFeatures = require('../utils/apiFeatures');
 
 /**
  * @description controller method to get all products
@@ -10,10 +11,18 @@ const asyncWrapper = require('../middleware/asyncWrapper');
  */
 const getAllProductsAsync = asyncWrapper(async (req, res) => {
 
-    const products = await Product.find();
+    const resultPerPage = 5;
+    const totalProductCount = await Product.countDocuments();
+
+    const apiFeature = new ApiFeatures(Product.find(), req.query)
+        .search()
+        .filter()
+        .pagination(resultPerPage);
+    const products = await apiFeature.query;
 
     res.status(200).json({
         success: true,
+        totalProductCount,
         products
     });
 })

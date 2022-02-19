@@ -21,5 +21,15 @@
 ## ✨ Phases ✨
 
 ```
-Phase - 1: Build initial route for Product
+Phase - 1: Initials & Build route for Products
 ```
++ Setup Express server and handle servers errors
++ Setup MongoDB (handle connections, errors), created a schema for Product
++ create basic CRUD operation on Products Schema
++ built an ApiFeatures class to handle all kind of operation on APIs, e.g search, filter, pagination
+
+```
+Phase - 2: Create User Schema & Authentication (UserName & Password)
+```
++ `npm i bcryptjs jsonwebtoken validator nodemailer cookie-parser body-parser`
++ 
