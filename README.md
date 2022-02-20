@@ -29,7 +29,14 @@ Phase - 1: Initials & Build route for Products
 + built an ApiFeatures class to handle all kind of operation on APIs, e.g search, filter, pagination
 
 ```
-Phase - 2: Create User Schema & Authentication (UserName & Password)
+Phase - 2: Create User Schema & Authentication (Email & Password)
 ```
-+ `npm i bcryptjs jsonwebtoken validator nodemailer cookie-parser body-parser`
-+ 
++ create user using userSchema
++ while registering, hash the password by using schema event `pre` and use `bcryptjs` npm package for hashing. 
++ while login compare normal password with hased password by creating a schema method which will also use `bcryptjs` npm package.
++ upon successfully login/register return `JWTwebToken` by creating schema mothed which will use `jsonwebtoken` npm package.
++ save the token in cookie by defining some options( e.g cookie expiry time)
+
+```
+Phase - 3: Protect API endpoints 
+```
