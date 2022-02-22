@@ -40,3 +40,16 @@ Phase - 2: Create User Schema & Authentication (Email & Password)
 ```
 Phase - 3: Protect API endpoints 
 ```
++ created an Authetication middleware, which will verify the user from JWT and addd the user to request pipeline
++ created an Authorization middleware to protect API endpoints based on user role (e.g. normal user, admin)
+
+```
+Phase - 4: Reset password functionality (send reset password mail)
+```
++ created a moongoose Schema method on userModel, which will store a resetPasswordToken  in Schema and save the state in DB along with expiry time by using sha-256 cryptography.
++ created an API endpoint to send the reset token
+    + which will call the Schema method to get reset token
+    + then it will call sendMail function (created using `nodemailer` npm package)
+    + if there is any error it will clear the resetPasswordToken from schema and save the state in DB
++ need to create API endpoint to reset password from reset token link
+ + 
