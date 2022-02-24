@@ -5,6 +5,7 @@ const {
   updateProductAsync,
   deleteProductAsync,
   getProductDetailsByIdAsync,
+  createProductReviewAsync,
 } = require("../controllers/productController");
 
 const {
@@ -18,14 +19,17 @@ router.route("/products").get(getAllProductsAsync);
 
 // Create Product  - Only Admin
 router
-  .route("/product/new")
+  .route("/admin/product/new")
   .post(isAuthenticated, isAuthorizeRoles("admin"), createProductAsync);
 
 //update and delete product - Only Admin
 router
-  .route("/product/:id")
-  .get(getProductDetailsByIdAsync)
+  .route("/admin/product/:id")
   .put(isAuthenticated, isAuthorizeRoles("admin"), updateProductAsync)
   .delete(isAuthenticated, isAuthorizeRoles("admin"), deleteProductAsync);
+
+router.route("/product/:id").get(getProductDetailsByIdAsync);
+
+router.route("/review").put(isAuthenticated, createProductReviewAsync);
 
 module.exports = router;

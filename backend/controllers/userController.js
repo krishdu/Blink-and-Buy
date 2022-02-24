@@ -3,6 +3,7 @@ const { createCustomError } = require("../utils/errorHandler");
 const asyncWrapper = require("../middleware/asyncWrapper");
 const saveToken = require("../utils/generateSaveTokenInCookie");
 const sendEmail = require("../utils/sendEmail");
+const crypto = require("crypto");
 
 /**
  * @param  {} req
@@ -19,7 +20,7 @@ const registerUser = asyncWrapper(async (req, res, next) => {
     password,
     avatar: {
       public_id: "demo id",
-      url: "demo url",
+      url: "demourl",
     },
   });
 
@@ -72,6 +73,12 @@ const logoutUser = asyncWrapper(async (req, res, next) => {
   });
 });
 
+/**
+ * @description generate a hash and send it to user email
+ * @param  {} req
+ * @param  {} res
+ * @param  {} next
+ */
 const forgotPassword = asyncWrapper(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
 
@@ -110,9 +117,202 @@ const forgotPassword = asyncWrapper(async (req, res, next) => {
   }
 });
 
+/**
+ * @description link to reset password from reset token
+ * @param  {} req
+ * @param  {} res
+ * @param  {} next
+ * @returns return and save token in cookie
+ */
+const resetPassword = asyncWrapper(async (req, res, next) => {
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(req.params.token)
+    .digest("hex");
+
+  const user = await User.findOne({
+    resetPasswordToken,
+    resetPasswordExpire: { $gt: Date.now() },
+  });
+
+  if (!user) {
+    return next(createCustomError("link invalid or has been expired", 400));
+  }
+
+  if (req.body.password != req.body.confirmPassword) {
+    return next(createCustomError("password not matched", 400));
+  }
+
+  user.password = req.body.password;
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpire = undefined;
+  await user.save();
+  saveToken(user, 200, res);
+});
+
+/**
+ * @description get user details
+ * @param  {} req
+ * @param  {} res
+ * @param  {} next
+ * @returns user details
+ */
+const getUserDetails = asyncWrapper(async (req, res, next) => {
+  const user = await User.findById(req.user._id);
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+/**
+ * @description update password with your old password while login
+ * @param  {} req
+ * @param  {} res
+ * @param  {} next
+ * @returns return and save token in cookie
+ */
+const updatePassword = asyncWrapper(async (req, res, next) => {
+  const user = await User.findById(req.user.id).select("+password");
+  const isPasswordMatched = await user.comparePassword(req.body.oldPassword);
+
+  if (!isPasswordMatched) {
+    return next(createCustomError("old Password is incorrect", 400));
+  }
+
+  if (req.body.password != req.body.confirmPassword) {
+    return next(createCustomError("password not matched", 400));
+  }
+
+  user.password = req.body.password;
+  await user.save();
+  saveToken(user, 200, res);
+});
+
+/**
+ * @description update user profile
+ * @param  {} req
+ * @param  {} res
+ * @param  {} next
+ */
+const updateProfile = asyncWrapper(async (req, res, next) => {
+  const updatedUserDetails = {
+    name: req.body.name,
+    email: req.body.email,
+  };
+
+  const user = await User.findByIdAndUpdate(req.user.id, updatedUserDetails, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+/**
+ * @description get all user --admin
+ * @param  {} req
+ * @param  {} res
+ * @param  {} next
+ */
+const getAllUser = asyncWrapper(async (req, res, next) => {
+  const users = await User.find();
+
+  res.status(200).json({
+    success: true,
+    users,
+  });
+});
+
+/**
+ * @description get a single user -admin
+ * @param  {} req
+ * @param  {} res
+ * @param  {} next
+ */
+const getSingleUser = asyncWrapper(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(
+      createCustomError(`user does not exists with id: ${req.params.id}`, 404)
+    );
+  }
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+/**
+ * @description update user profile/role by admin
+ * @param  {} req
+ * @param  {} res
+ * @param  {} next
+ */
+const updateUserByAdmin = asyncWrapper(async (req, res, next) => {
+  const updatedUserDetails = {
+    name: req.body.name,
+    email: req.body.email,
+    role: req.body.role,
+  };
+
+  const user = await User.findByIdAndUpdate(req.params.id, updatedUserDetails, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  if (!user) {
+    return next(
+      createCustomError(`user does not exists with id: ${req.params.id}`, 404)
+    );
+  }
+
+  res.status(200).json({
+    success: true,
+  });
+});
+
+/**
+ * @description delete user by admin
+ * @param  {} req
+ * @param  {} res
+ * @param  {} next
+ */
+const deleteUser = asyncWrapper(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(
+      createCustomError(`user does not exists with id: ${req.params.id}`, 404)
+    );
+  }
+
+  await user.remove();
+
+  res.status(200).json({
+    success: true,
+  });
+});
+
 module.exports = {
   registerUser,
   loginUser,
   forgotPassword,
+  resetPassword,
+  getUserDetails,
+  updatePassword,
+  updateProfile,
+  getAllUser,
+  getSingleUser,
+  updateUserByAdmin,
+  deleteUser,
   logoutUser,
 };

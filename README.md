@@ -51,5 +51,21 @@ Phase - 4: Reset password functionality (send reset password mail)
     + which will call the Schema method to get reset token
     + then it will call sendMail function (created using `nodemailer` npm package)
     + if there is any error it will clear the resetPasswordToken from schema and save the state in DB
-+ need to create API endpoint to reset password from reset token link
- + 
++ created API endpoint to reset password from reset token link
+ + hash the token with same Algorithm
+ + compare token with db stored reset token and expiry time greater than present time
+    + reset the password
+
+```
+Phase -5: Update Password and Some extra endpoint for Admin
+```
++ update password will perform if the user is logged in and given old password matched with db saved password
+    + then only password will update
+
++ created endpoints like `all user`, `update user role`, `delete user`
+
+```
+Phase -6: Product Reviews, Ratings Routes
+```
++ created an endpoint to add and update product review
++ 
