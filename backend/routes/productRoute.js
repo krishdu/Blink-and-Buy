@@ -6,6 +6,8 @@ const {
   deleteProductAsync,
   getProductDetailsByIdAsync,
   createProductReviewAsync,
+  getProductReviewsAsync,
+  deleteReviewsAsync,
 } = require("../controllers/productController");
 
 const {
@@ -31,5 +33,10 @@ router
 router.route("/product/:id").get(getProductDetailsByIdAsync);
 
 router.route("/review").put(isAuthenticated, createProductReviewAsync);
+
+router
+  .route("/reviews")
+  .get(getProductReviewsAsync)
+  .delete(isAuthenticated, deleteReviewsAsync);
 
 module.exports = router;

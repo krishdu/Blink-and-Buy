@@ -38,7 +38,9 @@ const getProductDetailsByIdAsync = asyncWrapper(async (req, res, next) => {
   let product = await Product.findById(productId);
 
   if (!product) {
-    return next(createCustomError(`No product fond with Id ${productId}`, 404));
+    return next(
+      createCustomError(`No product found with Id ${productId}`, 404)
+    );
   }
 
   res.status(200).json({
@@ -77,7 +79,9 @@ const updateProductAsync = asyncWrapper(async (req, res, next) => {
   let product = await Product.findById(productId);
 
   if (!product) {
-    return next(createCustomError(`No product fond with Id ${productId}`, 404));
+    return next(
+      createCustomError(`No product found with Id ${productId}`, 404)
+    );
   }
 
   product = await Product.findByIdAndUpdate(productId, req.body, {
@@ -119,7 +123,7 @@ const deleteProductAsync = asyncWrapper(async (req, res, next) => {
 
 /**
  * @description create/adjust product reviews
- * @param  {} async(req
+ * @param  {} req
  * @param  {} res
  * @param  {} next
  * @returns success: true
@@ -165,7 +169,77 @@ const createProductReviewAsync = asyncWrapper(async (req, res, next) => {
   });
 
   product.ratings = avgRatings / product.reviews.length;
+
   await product.save({ validateBeforeSave: false });
+  res.status(200).json({
+    success: true,
+  });
+});
+
+/**
+ * @description get all reviews of a product
+ * @param  {} req
+ * @param  {} res
+ * @param  {} next
+ */
+const getProductReviewsAsync = asyncWrapper(async (req, res, next) => {
+  const { id: productId } = req.query;
+  let product = await Product.findById(productId);
+
+  if (!product) {
+    return next(
+      createCustomError(`No product found with Id ${productId}`, 404)
+    );
+  }
+
+  res.status(200).json({
+    success: true,
+    reviews: product.reviews,
+  });
+});
+
+/**
+ * @description delete product review, re-calculate ratings
+ * @param  {} async(req
+ * @param  {} res
+ * @param  {} next
+ */
+const deleteReviewsAsync = asyncWrapper(async (req, res, next) => {
+  const { reviewId, productId } = req.query;
+  let product = await Product.findById(productId);
+
+  if (!product) {
+    return next(
+      createCustomError(`No product found with Id ${productId}`, 404)
+    );
+  }
+
+  const reviews = product.reviews.filter(
+    (rev) => rev._id.toString() !== reviewId.toString()
+  );
+
+  let avgRatings = 0;
+
+  reviews.forEach((rev) => {
+    avgRatings += rev.rating;
+  });
+
+  const numOfReviews = reviews.length;
+  const ratings = avgRatings / numOfReviews;
+  await Product.findByIdAndUpdate(
+    productId,
+    {
+      ratings,
+      reviews,
+      numOfReviews,
+    },
+    {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    }
+  );
+
   res.status(200).json({
     success: true,
   });
@@ -178,4 +252,6 @@ module.exports = {
   updateProductAsync,
   deleteProductAsync,
   createProductReviewAsync,
+  getProductReviewsAsync,
+  deleteReviewsAsync,
 };

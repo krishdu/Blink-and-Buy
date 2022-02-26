@@ -57,7 +57,7 @@ Phase - 4: Reset password functionality (send reset password mail)
     + reset the password
 
 ```
-Phase -5: Update Password and Some extra endpoint for Admin
+Phase - 5: Update Password and Some extra endpoint for Admin
 ```
 + update password will perform if the user is logged in and given old password matched with db saved password
     + then only password will update
@@ -65,7 +65,8 @@ Phase -5: Update Password and Some extra endpoint for Admin
 + created endpoints like `all user`, `update user role`, `delete user`
 
 ```
-Phase -6: Product Reviews, Ratings Routes
+Phase - 6: Order Schema and CRUD operations
 ```
-+ created an endpoint to add and update product review
-+ 
++ Created an Order Schema model
++ created route like placeOrder, getAllOrder, UpdateProductOrderStatus, deleteOrderByAdmin, getMyOrders etc.
++  
