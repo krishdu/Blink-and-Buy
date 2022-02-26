@@ -152,6 +152,12 @@ const deleteOrderAsync = asyncWrapper(async (req, res, next) => {
     );
   }
 
+  if (order.orderStatus === "Delivered") {
+    return next(
+      createCustomError("This product has already been delivered", 400)
+    );
+  }
+
   await order.remove();
 
   res.status(200).json({
