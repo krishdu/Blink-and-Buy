@@ -69,4 +69,8 @@ Phase - 6: Order Schema and CRUD operations
 ```
 + Created an Order Schema model
 + created route like placeOrder, getAllOrder, UpdateProductOrderStatus, deleteOrderByAdmin, getMyOrders etc.
-+  
+
+```
+Phase - 7: Order Schema and CRUD operations
+```
+npm i axios react-alert react-alert-template-basic react-helmet react-redux redux redux-thunk redux-devtools-extension react-router-dom overlay-navbar
