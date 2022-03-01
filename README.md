@@ -71,6 +71,7 @@ Phase - 6: Order Schema and CRUD operations
 + created route like placeOrder, getAllOrder, UpdateProductOrderStatus, deleteOrderByAdmin, getMyOrders etc.
 
 ```
-Phase - 7: Order Schema and CRUD operations
+Phase - 7: UI
 ```
-npm i axios react-alert react-alert-template-basic react-helmet react-redux redux redux-thunk redux-devtools-extension react-router-dom overlay-navbar
++ packages `npm i axios react-alert react-alert-template-basic react-helmet react-redux redux redux-thunk redux-devtools-extension react-router-dom overlay-navbar react-icons@3`
++ build header and footer component, then completed featured product component using Dummy data
