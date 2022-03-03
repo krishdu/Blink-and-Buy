@@ -1,7 +1,10 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { CgMouse } from "react-icons/cg";
 import "./Home.css";
 import Product from "../Product/Product.js";
+import MetaData from "../layout/MetaData";
+import { getProducts } from "../../store/actions/productActions";
+import { useSelector, useDispatch } from "react-redux";
 
 const DUMMY_PRODUCTS = {
   name: "Blue T-Shirt",
@@ -15,11 +18,19 @@ const DUMMY_PRODUCTS = {
 };
 
 const Home = (props) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProducts);
+  }, [dispatch]);
+
   return (
     <Fragment>
+      <MetaData title="Home Page" />
+
       <div className="banner">
-        <p>Welcome to Blink&amp;Buy</p>
-        <h1>PRODUCTS ARE WAITING FOR YoU BELOW</h1>
+        <h3>Welcome to Blink&amp;Buy</h3>
+        <h1>PRODUCTS ARE WAITING FOR YoU</h1>
         <a href="#container">
           <button>
             Scroll <CgMouse />
@@ -28,7 +39,7 @@ const Home = (props) => {
       </div>
       <h2 className="homeHeading"> Featured Products </h2>
 
-      <div className="container" id="#container">
+      <div className="container" id="container">
         <Product product={DUMMY_PRODUCTS} />
         <Product product={DUMMY_PRODUCTS} />
         <Product product={DUMMY_PRODUCTS} />
