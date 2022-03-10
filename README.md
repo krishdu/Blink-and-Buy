@@ -82,3 +82,5 @@ Phase 8: Redux store
 + create a store to combine all reducers
     + `Product`
         + created a reducer and define it's action ( e.g. get all product)
+        + created product details reducer and define route for it
+ 

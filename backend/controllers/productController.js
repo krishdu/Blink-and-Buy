@@ -10,7 +10,7 @@ const ApiFeatures = require("../utils/apiFeatures");
  * @returns array of products
  */
 const getAllProductsAsync = asyncWrapper(async (req, res) => {
-  const resultPerPage = 5;
+  const resultPerPage = 8;
   const totalProductCount = await Product.countDocuments();
 
   const apiFeature = new ApiFeatures(Product.find(), req.query)

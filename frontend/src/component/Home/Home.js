@@ -5,51 +5,51 @@ import Product from "../Product/Product.js";
 import MetaData from "../layout/MetaData";
 import { getProducts } from "../../store/actions/productActions";
 import { useSelector, useDispatch } from "react-redux";
-
-const DUMMY_PRODUCTS = {
-  name: "Blue T-Shirt",
-  images: [
-    {
-      url: "https://5.imimg.com/data5/BG/UM/MY-23375112/61-500x500.jpg",
-    },
-  ],
-  price: "$1800",
-  _id: "sbfdksb",
-};
+import Loader from "../layout/Loader/Loader";
+import { useAlert } from "react-alert";
 
 const Home = (props) => {
+  const alert = useAlert();
   const dispatch = useDispatch();
 
+  const { loading, error, products, productsCount } = useSelector(
+    (state) => state.products
+  );
+
   useEffect(() => {
-    dispatch(getProducts);
-  }, [dispatch]);
+    if (error) {
+      return alert.error(error);
+    }
+    dispatch(getProducts());
+  }, [dispatch, error, alert]);
 
   return (
     <Fragment>
-      <MetaData title="Home Page" />
+      {loading ? (
+        <Loader />
+      ) : (
+        <Fragment>
+          <MetaData title="Home Page" />
 
-      <div className="banner">
-        <h3>Welcome to Blink&amp;Buy</h3>
-        <h1>PRODUCTS ARE WAITING FOR YoU</h1>
-        <a href="#container">
-          <button>
-            Scroll <CgMouse />
-          </button>
-        </a>
-      </div>
-      <h2 className="homeHeading"> Featured Products </h2>
+          <div className="banner">
+            <h3>Welcome to Blink&amp;Buy</h3>
+            <h1>PRODUCTS ARE WAITING FOR YoU</h1>
+            <a href="#container">
+              <button>
+                Scroll <CgMouse />
+              </button>
+            </a>
+          </div>
+          <h2 className="homeHeading"> Featured Products </h2>
 
-      <div className="container" id="container">
-        <Product product={DUMMY_PRODUCTS} />
-        <Product product={DUMMY_PRODUCTS} />
-        <Product product={DUMMY_PRODUCTS} />
-        <Product product={DUMMY_PRODUCTS} />
-
-        <Product product={DUMMY_PRODUCTS} />
-        <Product product={DUMMY_PRODUCTS} />
-        <Product product={DUMMY_PRODUCTS} />
-        <Product product={DUMMY_PRODUCTS} />
-      </div>
+          <div className="container" id="container">
+            {products &&
+              products.map((product) => (
+                <Product key={product._id} product={product} />
+              ))}
+          </div>
+        </Fragment>
+      )}
     </Fragment>
   );
 };
