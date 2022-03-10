@@ -10,6 +10,11 @@ import {
   CLEAR_ERROR,
 } from "../constants/productConstants";
 
+/**
+ * @description getProduct action
+ * @param  {} dispatch
+ * @returns async function handler
+ */
 export const getProducts = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_PRODUCT_REQUEST });
@@ -23,6 +28,12 @@ export const getProducts = () => async (dispatch) => {
   }
 };
 
+/**
+ * @description get product details action
+ * @param {} id
+ * @param  {} dispatch
+ * @returns async function handler
+ */
 export const getProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
@@ -43,8 +54,3 @@ export const getProductDetails = (id) => async (dispatch) => {
 export const clearErrors = async (dispatch) => {
   dispatch({ type: CLEAR_ERROR });
 };
-
-// module.exports = {
-//   getProducts,
-//   clearErrors,
-// };

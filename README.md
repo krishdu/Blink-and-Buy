@@ -77,10 +77,10 @@ Phase - 7: UI
 + build header and footer component, then completed featured product component using Dummy data
 
 ```
-Phase 8: Redux store
+Phase 8: Redux store | product components
 ```
 + create a store to combine all reducers
     + `Product`
         + created a reducer and define it's action ( e.g. get all product)
         + created product details reducer and define route for it
- 
+            + Create a product details page component (added Carousel using `react-material-ui-carousel`)
