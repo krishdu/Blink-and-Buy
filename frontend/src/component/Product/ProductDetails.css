@@ -1,6 +1,6 @@
 
 .productDetails{
-    background-color: rgb(214, 214, 214);
+    background-color:white;
     width: 100vw;
     max-width: 100%;
     padding: 6vmax;
@@ -143,6 +143,28 @@
 .submitReview:hover{
     background-color: rgb(197, 68, 45);
     transform: scale(1.1);
+}
+
+.reviewsHeading {
+  color: black;
+  font: 500 1.4vmax 'Roboto';
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.226);
+  padding: 1vmax;
+  width: 20vmax;
+  margin: auto;
+  margin-bottom: 4vmax;
+}
+
+.reviews{
+  display: flex;
+  overflow: auto;
+}
+
+.noReview{
+  color: rgba(0, 0, 0, 0.548);
+  font: 500 1.3vmax 'Grill sans';
+  text-align: center;
 }
 
 @media screen and (max-width: 600px) {
