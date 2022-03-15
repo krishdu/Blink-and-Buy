@@ -85,4 +85,4 @@ Phase 8: Redux store | product components
         + created product details reducer and define route for it
             + Create a product details page component (added Carousel using `react-material-ui-carousel`)
                 + Added review card component for product reviews
-        
+        + create a Product Search component
