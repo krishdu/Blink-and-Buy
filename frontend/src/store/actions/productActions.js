@@ -16,12 +16,12 @@ import {
  * @returns async function handler
  */
 export const getProducts =
-  (keyword = "") =>
+  (keyword = "", currentPage = 1, price = [0, 25000]) =>
   async (dispatch) => {
     try {
       dispatch({ type: ALL_PRODUCT_REQUEST });
 
-      let generatedLink = `/api/v1/products?keyword=${keyword}`;
+      let generatedLink = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`;
 
       const { data } = await axios.get(generatedLink);
 

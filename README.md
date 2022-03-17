@@ -86,3 +86,5 @@ Phase 8: Redux store | product components
             + Create a product details page component (added Carousel using `react-material-ui-carousel`)
                 + Added review card component for product reviews
         + create a Product Search component
+        + added pagination using `react-js-pagination` package
+        + added price filter using `@material-ui/core/Slider`
