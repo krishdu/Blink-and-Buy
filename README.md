@@ -16,6 +16,7 @@
 + ### Learnings:
     + handle `unhandledRejection`, `uncaughtException` in server
     + error handling using middleware and handle aync task exception by creating async wrapper.
+    + how to use third-party packages (e.g materialui)
 
 
 ## ✨ Phases ✨
@@ -88,3 +89,4 @@ Phase 8: Redux store | product components
         + create a Product Search component
         + added pagination using `react-js-pagination` package
         + added price filter using `@material-ui/core/Slider`
+        + added category and ratings filter

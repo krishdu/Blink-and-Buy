@@ -10,6 +10,7 @@ import ReactStars from "react-rating-stars-component";
 import ReviewCard from "./ReviewCard.js";
 import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
+import MetaData from "../layout/MetaData";
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
@@ -44,6 +45,7 @@ const ProductDetails = ({ match }) => {
         <Loader />
       ) : (
         <Fragment>
+          <MetaData title={`${product.name} -- Blink-Buy`} />
           <div className="productDetails">
             <div>
               <Carousel>

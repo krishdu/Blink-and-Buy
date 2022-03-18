@@ -8,10 +8,13 @@
   margin: 2vmax;
   transition: all 0.5s;
   padding-bottom: 0.5vmax;
+  box-shadow: 0 0 4px rgba(10, 10, 10, 0.26);
+  transform: rotate(6deg);
 }
 
 .productCard > img {
   width: 14vmax;
+  height: 17vmax;
 }
 
 .productCard > div {

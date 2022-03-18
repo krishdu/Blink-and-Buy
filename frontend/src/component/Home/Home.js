@@ -12,9 +12,7 @@ const Home = (props) => {
   const alert = useAlert();
   const dispatch = useDispatch();
 
-  const { loading, error, products } = useSelector(
-    (state) => state.products
-  );
+  const { loading, error, products } = useSelector((state) => state.products);
 
   useEffect(() => {
     if (error) {
@@ -31,7 +29,7 @@ const Home = (props) => {
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title="Home Page" />
+          <MetaData title="Home-- Blink-Buy" />
 
           <div className="banner">
             <h3>Welcome to Blink&amp;Buy</h3>
