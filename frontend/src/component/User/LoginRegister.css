@@ -73,7 +73,7 @@
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 0.267);
   border-radius: 4px;
-  font: 300 0.9vmax cursive;
+  font: 300 1.1vmax cursive;
   outline: none;
 }
 
@@ -90,7 +90,7 @@
   text-decoration: none;
   align-self: flex-end;
   transition: all 0.5s;
-  font: 500 0.8vmax "Gill Sans";
+  font: 500 1vmax "Gill Sans";
 }
 
 .loginForm > a:hover {

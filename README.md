@@ -92,3 +92,4 @@ Phase 8: Redux store | product components
         + added category and ratings filter
     + `User`
         + Create a component for Login and Register user
+        + build redux store for user and define login action
