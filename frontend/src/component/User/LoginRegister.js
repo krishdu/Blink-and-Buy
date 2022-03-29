@@ -7,7 +7,11 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 import FaceIcon from "@material-ui/icons/FaceRounded";
 import ProfilePNG from "../../images/profile.png";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUserAction, clearErrors } from "../../store/actions/userActions";
+import {
+  loginUserAction,
+  registerUserAction,
+  clearErrors,
+} from "../../store/actions/userActions";
 import { useAlert } from "react-alert";
 
 const LoginRegister = ({ history }) => {
@@ -73,7 +77,7 @@ const LoginRegister = ({ history }) => {
     myForm.set("email", email);
     myForm.set("password", password);
     myForm.set("avatar", avatar);
-    console.log("register Form Submitted");
+    dispatch(registerUserAction(myForm));
   };
 
   const registerDetailsChangeHandler = (e) => {
@@ -182,7 +186,7 @@ const LoginRegister = ({ history }) => {
                   <input
                     type="file"
                     name="avatar"
-                    acdept="image/*"
+                    accept="image/*"
                     onChange={registerDetailsChangeHandler}
                   />
                 </div>

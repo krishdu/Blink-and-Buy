@@ -4,6 +4,7 @@ const asyncWrapper = require("../middleware/asyncWrapper");
 const saveToken = require("../utils/generateSaveTokenInCookie");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
+const cloudinary = require("cloudinary");
 
 /**
  * @param  {} req
@@ -12,6 +13,12 @@ const crypto = require("crypto");
  * @returns jwt TOEKN
  */
 const registerUser = asyncWrapper(async (req, res, next) => {
+  const cloudGallery = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "avatars",
+    width: 150,
+    crop: "scale",
+  });
+
   const { name, email, password } = req.body;
 
   const user = await User.create({
@@ -19,8 +26,8 @@ const registerUser = asyncWrapper(async (req, res, next) => {
     email,
     password,
     avatar: {
-      public_id: "demo id",
-      url: "demourl",
+      public_id: cloudGallery.public_id,
+      url: cloudGallery.secure_url,
     },
   });
 

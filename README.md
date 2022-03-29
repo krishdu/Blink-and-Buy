@@ -93,3 +93,4 @@ Phase 8: Redux store | product components
     + `User`
         + Create a component for Login and Register user
         + build redux store for user and define login action
+        + created  register action with profile picture upload feature (using `cloudinary` in backend);
