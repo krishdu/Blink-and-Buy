@@ -188,11 +188,11 @@ const updatePassword = asyncWrapper(async (req, res, next) => {
     return next(createCustomError("old Password is incorrect", 400));
   }
 
-  if (req.body.password != req.body.confirmPassword) {
+  if (req.body.newPassword != req.body.confirmPassword) {
     return next(createCustomError("password not matched", 400));
   }
 
-  user.password = req.body.password;
+  user.password = req.body.newPassword;
   await user.save();
   saveToken(user, 200, res);
 });
@@ -208,6 +208,24 @@ const updateProfile = asyncWrapper(async (req, res, next) => {
     name: req.body.name,
     email: req.body.email,
   };
+
+  if (req.body.avatar != "") {
+    const user = await User.findById(req.user._id);
+
+    const imageId = user.avatar.public_id;
+    await cloudinary.v2.uploader.destroy(imageId);
+
+    const cloudGallery = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "avatars",
+      width: 150,
+      crop: "scale",
+    });
+
+    updatedUserDetails.avatar = {
+      public_id: cloudGallery.public_id,
+      url: cloudGallery.secure_url,
+    };
+  }
 
   const user = await User.findByIdAndUpdate(req.user.id, updatedUserDetails, {
     new: true,

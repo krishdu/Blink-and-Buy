@@ -95,4 +95,6 @@ Phase 8: Redux store | product components
         + build redux store for user and define login action
         + created  register action with profile picture upload feature (using `cloudinary` in backend);
         + add SpeedDial component from `@material-ui/lab` for showing dashboard, logout btn, profile btn etc.
+        + added update profile component
+        + added update password Component.
         

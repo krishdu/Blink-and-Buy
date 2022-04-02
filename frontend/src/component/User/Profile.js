@@ -25,7 +25,7 @@ const Profile = ({ history }) => {
             <div>
               <h1>My Profile</h1>
               <img src={user.avatar.url} alt={user.name} />
-              <Link to="/me/update">Edit Profile</Link>
+              <Link to="/updateprofile">Edit Profile</Link>
             </div>
             <div>
               <div>
@@ -42,7 +42,7 @@ const Profile = ({ history }) => {
               </div>
               <div>
                 <Link to="/orders">My Orders</Link>
-                <Link to="/password/update">Change Password</Link>
+                <Link to="/updatePassword">Change Password</Link>
               </div>
             </div>
           </div>
