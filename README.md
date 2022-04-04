@@ -97,4 +97,5 @@ Phase 8: Redux store | product components
         + add SpeedDial component from `@material-ui/lab` for showing dashboard, logout btn, profile btn etc.
         + added update profile component
         + added update password Component.
+        + added a component for sending reset password link using email id
         
