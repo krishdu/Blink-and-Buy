@@ -98,4 +98,7 @@ Phase 8: Redux store | product components
         + added update profile component
         + added update password Component.
         + added a component for sending reset password link using email id
+        + added a component so that user can reset their password using the sent reset link
+    + `Cart`
+        + Created a cart component
         

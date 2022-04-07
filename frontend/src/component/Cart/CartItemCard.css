@@ -1,0 +1,17 @@
+.CartItemCard{
+    display: flex;
+    padding: 1vmax;
+    height: 8vmax;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+.CartItemCard > img {
+    width: 5vmax;
+}
+
+.CartItemCard > div {
+    display: flex;
+    margin: 0.3vmax 1vmax;
+    flex-direction: column;
+}

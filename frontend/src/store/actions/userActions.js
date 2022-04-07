@@ -19,6 +19,9 @@ import {
   FORGOT_PASSWORD_REQUEST,
   FORGOT_PASSWORD_SUCCESS,
   FORGOT_PASSWORD_FAIL,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_FAIL,
   CLEAR_ERROR,
 } from "../constants/userConstants";
 
@@ -34,7 +37,7 @@ export const loginUserAction = (email, password) => async (dispatch) => {
     dispatch({ type: LOGIN_REQUEST });
     const headerConfig = { headers: { "Content-Type": "application/json" } };
     const { data } = await axios.post(
-      `api/v1/login`,
+      `/api/v1/login`,
       { email, password },
       headerConfig
     );
@@ -54,7 +57,7 @@ export const registerUserAction = (userData) => async (dispatch) => {
     dispatch({ type: REGISTER_USER_REQUEST });
     const headerConfig = { headers: { "Content-Type": "multipart/form-data" } };
     const { data } = await axios.post(
-      `api/v1/register`,
+      `/api/v1/register`,
       userData,
       headerConfig
     );
@@ -75,7 +78,7 @@ export const loadUserAction = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST });
 
-    const { data } = await axios.get(`api/v1/me`);
+    const { data } = await axios.get(`/api/v1/me`);
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
   } catch (error) {
@@ -88,7 +91,7 @@ export const loadUserAction = () => async (dispatch) => {
  */
 export const logoutAction = () => async (dispatch) => {
   try {
-    await axios.get(`api/v1/logout`);
+    await axios.get(`/api/v1/logout`);
     dispatch({ type: LOGOUT_USER_SUCCESS });
   } catch (error) {
     dispatch({ type: LOGOUT_USER_FAIL, payload: error.response.data.message });
@@ -105,7 +108,7 @@ export const updateProfileAction = (userData) => async (dispatch) => {
 
     const headerConfig = { headers: { "Content-Type": "multipart/form-data" } };
     const { data } = await axios.put(
-      "api/v1/me/update",
+      "/api/v1/me/update",
       userData,
       headerConfig
     );
@@ -129,7 +132,7 @@ export const updatePasswordAction = (passwords) => async (dispatch) => {
 
     const headerConfig = { headers: { "Content-Type": "application/json" } };
     const { data } = await axios.put(
-      "api/v1/password/update",
+      "/api/v1/password/update",
       passwords,
       headerConfig
     );
@@ -144,7 +147,7 @@ export const updatePasswordAction = (passwords) => async (dispatch) => {
 };
 
 /**
- * @description reducer action for fot=rgot password
+ * @description reducer action for forgot password
  * @param  {} email
  */
 export const forgotPasswordAction = (email) => async (dispatch) => {
@@ -152,7 +155,7 @@ export const forgotPasswordAction = (email) => async (dispatch) => {
     dispatch({ type: FORGOT_PASSWORD_REQUEST });
     const headerConfig = { headers: { "Content-Type": "application/json" } };
     const { data } = await axios.post(
-      `api/v1/password/forgot`,
+      `/api/v1/password/forgot`,
       email,
       headerConfig
     );
@@ -161,6 +164,29 @@ export const forgotPasswordAction = (email) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: FORGOT_PASSWORD_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+/**
+ * @description reducer action for reset password
+ * @param  {} passwords
+ */
+export const resetPasswordAction = (token, passwords) => async (dispatch) => {
+  try {
+    dispatch({ type: RESET_PASSWORD_REQUEST });
+    const headerConfig = { headers: { "Content-Type": "application/json" } };
+    const { data } = await axios.put(
+      `/api/v1/password/reset/${token}`,
+      passwords,
+      headerConfig
+    );
+
+    dispatch({ type: RESET_PASSWORD_SUCCESS, payload: data.success });
+  } catch (error) {
+    dispatch({
+      type: RESET_PASSWORD_FAIL,
       payload: error.response.data.message,
     });
   }

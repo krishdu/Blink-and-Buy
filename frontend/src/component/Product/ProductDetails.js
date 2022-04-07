@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Carousel from "react-material-ui-carousel";
 import "./ProductDetails.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,6 +11,7 @@ import ReviewCard from "./ReviewCard.js";
 import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
+import { addItemsToCartAction } from "../../store/actions/cartActions";
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
@@ -20,6 +21,11 @@ const ProductDetails = ({ match }) => {
   const { loading, error, product } = useSelector(
     (state) => state.productDetails
   );
+
+  const addItemsToBagHandler = () => {
+    dispatch(addItemsToCartAction(id, quantity));
+    alert.success("Item Add To Bag");
+  };
 
   useEffect(() => {
     if (error) {
@@ -37,6 +43,21 @@ const ProductDetails = ({ match }) => {
     size: window.innerWidth < 600 ? 20 : 25,
     value: product.ratings,
     isHalf: true,
+  };
+  const [quantity, setQuantity] = useState(1);
+
+  const decreaseQuantityHandler = () => {
+    if (quantity <= 1) return;
+
+    const tempQty = quantity - 1;
+    setQuantity(tempQty);
+  };
+
+  const increaseQuantityHandler = () => {
+    if (product.stock <= quantity) return;
+
+    const tempQty = quantity + 1;
+    setQuantity(tempQty);
   };
 
   return (
@@ -75,11 +96,11 @@ const ProductDetails = ({ match }) => {
                 <h1> {`₹${product.price}`} </h1>
                 <div className="detailsBlock-3-1">
                   <div className="detailsBlock-3-1-1">
-                    <button> - </button>
-                    <input value="1" type="number" />
-                    <button> + </button>
+                    <button onClick={decreaseQuantityHandler}> - </button>
+                    <input value={quantity} type="number" readOnly />
+                    <button onClick={increaseQuantityHandler}> + </button>
                   </div>
-                  <button>Add to Cart</button>
+                  <button onClick={addItemsToBagHandler}>Add to Bag</button>
                 </div>
                 <p>
                   Status:
