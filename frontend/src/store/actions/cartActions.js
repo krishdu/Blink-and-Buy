@@ -1,9 +1,9 @@
-import { ADD_TO_CART } from "../constants/cartConstants";
+import { ADD_TO_CART, REMOVE_CART_ITEM } from "../constants/cartConstants";
 import axios from "axios";
 
 /**
  * @description reducer action to add item to cart
- * @param  {} id
+ * @param  {} productId
  * @param  {} quantity
  */
 export const addItemsToCartAction =
@@ -21,6 +21,20 @@ export const addItemsToCartAction =
         quantity,
       },
     });
+
+    localStorage.setItem(
+      "cartItems",
+      JSON.stringify(getState().cart.cartItems)
+    );
+  };
+
+/**
+ * @description reducer action to remove item from cart
+ * @param  {} productId
+ */
+export const removeItemsFromCartAction =
+  (productId) => async (dispatch, getState) => {
+    dispatch({ type: REMOVE_CART_ITEM, payload: productId });
 
     localStorage.setItem(
       "cartItems",

@@ -100,5 +100,7 @@ Phase 8: Redux store | product components
         + added a component for sending reset password link using email id
         + added a component so that user can reset their password using the sent reset link
     + `Cart`
-        + Created a cart component
+        + Created a cart and cartItemCard component with Cart Reducer
+        + Created reducer action for remove item from cart
+        + added the total price and break price logic for each product
         
