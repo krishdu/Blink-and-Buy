@@ -17,6 +17,7 @@
     + handle `unhandledRejection`, `uncaughtException` in server
     + error handling using middleware and handle aync task exception by creating async wrapper.
     + how to use third-party packages (e.g materialui)
+    + how to use local-storage in combination with redux-reducer
 
 
 ## ✨ Phases ✨
@@ -103,4 +104,9 @@ Phase 8: Redux store | product components
         + Created a cart and cartItemCard component with Cart Reducer
         + Created reducer action for remove item from cart
         + added the total price and break price logic for each product
+        + added a Shipping Details Component
+            + used `country-state-city` package to populate state with respect to coutries 
+            + save shipping address in local storage (reducer action)
+            + if user loggedIn go for confirmOrder otherwise redirect to login page
+        + added a step visulizer `(Stepper)` from `materialUI`
         

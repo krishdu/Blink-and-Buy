@@ -14,7 +14,7 @@ import {
 } from "../../store/actions/userActions";
 import { useAlert } from "react-alert";
 
-const LoginRegister = ({ history }) => {
+const LoginRegister = ({ history, location }) => {
   const dispatch = useDispatch();
   const { loading, error, isAutheticated } = useSelector((state) => state.user);
   const alert = useAlert();
@@ -36,6 +36,10 @@ const LoginRegister = ({ history }) => {
   const [avatar, setAvatar] = useState();
   const [avatarPreview, setAvatarPreview] = useState(ProfilePNG);
 
+  const redirectTo = location.search
+    ? location.search.split("=")[1]
+    : "/account";
+
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -43,9 +47,9 @@ const LoginRegister = ({ history }) => {
     }
 
     if (isAutheticated) {
-      history.push("/account");
+      history.push(redirectTo);
     }
-  }, [error, alert, dispatch, history, isAutheticated]);
+  }, [error, alert, dispatch, history, isAutheticated, redirectTo]);
 
   const switchTab = (e, tab) => {
     if (tab === "login") {

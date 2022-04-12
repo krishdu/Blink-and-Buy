@@ -9,8 +9,9 @@ import {
 import { Link } from "react-router-dom";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import { Typography } from "@material-ui/core";
+import MetaData from "../layout/MetaData";
 
-const Cart = () => {
+const Cart = ({ history }) => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
 
@@ -29,9 +30,13 @@ const Cart = () => {
   const removeItemHandler = (productId) => {
     dispatch(removeItemsFromCartAction(productId));
   };
+  const checkoutHandler = () => {
+    history.push("/login?redirect=shipping");
+  };
 
   return (
     <Fragment>
+      <MetaData title="Empty Bag ---Blink-Buy" />
       {cartItems.length === 0 ? (
         <div className="emptyCart">
           <RemoveShoppingCartIcon />
@@ -40,6 +45,7 @@ const Cart = () => {
         </div>
       ) : (
         <Fragment>
+          <MetaData title="Your Bag ---Blink-Buy" />
           <div className="cartPage">
             <div className="cartHeader">
               <p>Product</p>
@@ -89,7 +95,7 @@ const Cart = () => {
               </div>
               <div></div>
               <div className="checkOutBtn">
-                <button> CheckOut</button>
+                <button onClick={checkoutHandler}> CheckOut</button>
               </div>
             </div>
           </div>

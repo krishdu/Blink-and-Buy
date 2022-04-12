@@ -1,4 +1,8 @@
-import { ADD_TO_CART, REMOVE_CART_ITEM } from "../constants/cartConstants";
+import {
+  ADD_TO_CART,
+  REMOVE_CART_ITEM,
+  SAVE_SHOPPING_INOFRMATION,
+} from "../constants/cartConstants";
 import axios from "axios";
 
 /**
@@ -40,4 +44,15 @@ export const removeItemsFromCartAction =
       "cartItems",
       JSON.stringify(getState().cart.cartItems)
     );
+  };
+
+/**
+ * @description reducer action to save shipping infomation locally
+ * @param  {} Object: shippingInfo
+ */
+export const saveShippingInformationAction =
+  (info) => async (dispatch, getState) => {
+    dispatch({ type: SAVE_SHOPPING_INOFRMATION, payload: info });
+
+    localStorage.setItem("shippingInfo", JSON.stringify(info));
   };
