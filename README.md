@@ -109,4 +109,6 @@ Phase 8: Redux store | product components
             + save shipping address in local storage (reducer action)
             + if user loggedIn go for confirmOrder otherwise redirect to login page
         + added a step visulizer `(Stepper)` from `materialUI`
+        + added Confirm Order component where user can see their whole summary about order.
+            + stored the entire order details in session storage.
         
