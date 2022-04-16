@@ -111,4 +111,8 @@ Phase 8: Redux store | product components
         + added a step visulizer `(Stepper)` from `materialUI`
         + added Confirm Order component where user can see their whole summary about order.
             + stored the entire order details in session storage.
+        + added a Payment Component
+            + added a backend route for process payment (using `Stripe` payment gateway- test mode), which will return a client secret key on the paticular payment intent.
+                + then from Payment Component we can make the payment (using the generated client secret key)
+            
         
