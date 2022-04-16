@@ -18,7 +18,8 @@
     + error handling using middleware and handle aync task exception by creating async wrapper.
     + how to use third-party packages (e.g materialui)
     + how to use local-storage in combination with redux-reducer
-
+    + use of `switch` in react-router-dom (resolve the conflict of two same path)
+        + i.e. /order/confirm vs /order/:id
 
 ## ✨ Phases ✨
 
@@ -113,6 +114,9 @@ Phase 8: Redux store | product components
             + stored the entire order details in session storage.
         + added a Payment Component
             + added a backend route for process payment (using `Stripe` payment gateway- test mode), which will return a client secret key on the paticular payment intent.
-                + then from Payment Component we can make the payment (using the generated client secret key)
+                + then from Payment Component we can make the payment (using the generated client secret key).
+                + On succesful payment go to OrderSucess Component.
+        + Added myOrders component using `material-ui data-grid`(to show all orders as a table) package.
+        + Added orderDetails Component to view a paticular order.
             
         

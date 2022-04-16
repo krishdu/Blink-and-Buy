@@ -21,7 +21,7 @@ const UserOptions = ({ user }) => {
   const dispatch = useDispatch();
 
   const ordersHandler = () => {
-    history.push("/orders");
+    history.push("/orders/me");
   };
 
   const accountHandler = () => {

@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useEffect, useRef } from "react";
 import MetaData from "../layout/MetaData";
 import CheckoutSteps from "./CheckoutSteps";
 import "./Payment.css";
@@ -16,6 +16,10 @@ import { Typography } from "@material-ui/core";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import {
+  clearErrors,
+  createOrderAction,
+} from "../../store/actions/orderAction";
 
 const Payment = ({ history }) => {
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
@@ -27,10 +31,21 @@ const Payment = ({ history }) => {
   const element = useElements();
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
+  const { error } = useSelector((state) => state.newOrder);
 
   //convert to paisa
   const paymentDetails = {
     amount: Math.round(orderInfo.totalPrice * 100),
+  };
+
+  //create order details
+  const orderDetails = {
+    shippingInfo,
+    orderItems: cartItems,
+    itemPrice: orderInfo.subtotal,
+    taxPrice: orderInfo.tax,
+    shippingPrice: orderInfo.shippingCharges,
+    totalPrice: orderInfo.totalPrice,
   };
 
   const submitHandler = async (e) => {
@@ -75,7 +90,12 @@ const Payment = ({ history }) => {
         alert.error(result.error.message);
       } else {
         if (result.paymentIntent.status === "succeeded") {
-          history.push("/payment/success");
+          orderDetails.paymentInfo = {
+            id: result.paymentIntent.id,
+            status: result.paymentIntent.status,
+          };
+          dispatch(createOrderAction(orderDetails));
+          history.push("/order/success");
         } else {
           alert.error("Something went wrong, Please TRY AGAIN!");
         }
@@ -85,6 +105,14 @@ const Payment = ({ history }) => {
       alert.error(error.response.data.message);
     }
   };
+
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error, alert]);
+
   return (
     <Fragment>
       <MetaData title="Payment --Blink-Buy" />

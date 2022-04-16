@@ -1,7 +1,7 @@
 import "./App.css";
 import Header from "./component/layout/Header/Header";
 import Footer from "./component/layout/Footer/Footer";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import WebFont from "webfontloader";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -23,6 +23,9 @@ import Cart from "./component/Cart/Cart";
 import Shipping from "./component/Cart/Shipping";
 import ConfirmOrder from "./component/Cart/ConfirmOrder";
 import Payment from "./component/Cart/Payment";
+import OrderSuccess from "./component/Cart/OrderSuccess";
+import MyOrders from "./component/Order/MyOrders";
+import OrderDetails from "./component/Order/OrderDetails";
 import axios from "axios";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -75,13 +78,21 @@ function App() {
 
       <ProtectedRoute exact path="/shipping" component={Shipping} />
 
-      <ProtectedRoute exact path="/order/confirm" component={ConfirmOrder} />
-
       {stripeApiKey && (
         <Elements stripe={loadStripe(stripeApiKey)}>
           <ProtectedRoute exact path="/process/payment" component={Payment} />
         </Elements>
       )}
+
+      <ProtectedRoute exact path="/order/success" component={OrderSuccess} />
+
+      <ProtectedRoute exact path="/orders/me" component={MyOrders} />
+
+      <Switch>
+        <ProtectedRoute exact path="/order/confirm" component={ConfirmOrder} />
+
+        <ProtectedRoute exact path="/order/:id" component={OrderDetails} />
+      </Switch>
 
       <Footer />
     </Router>

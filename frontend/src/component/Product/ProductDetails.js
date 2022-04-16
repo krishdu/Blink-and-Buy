@@ -100,7 +100,12 @@ const ProductDetails = ({ match }) => {
                     <input value={quantity} type="number" readOnly />
                     <button onClick={increaseQuantityHandler}> + </button>
                   </div>
-                  <button onClick={addItemsToBagHandler}>Add to Bag</button>
+                  <button
+                    disabled={product.stock < 1 ? true : false}
+                    onClick={addItemsToBagHandler}
+                  >
+                    Add to Bag
+                  </button>
                 </div>
                 <p>
                   Status:
