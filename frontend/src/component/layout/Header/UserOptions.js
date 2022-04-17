@@ -34,7 +34,7 @@ const UserOptions = ({ user }) => {
   };
 
   const dashboardHandler = () => {
-    history.push("/dashboard");
+    history.push("/admin/dashboard");
   };
 
   const cartHandler = () => {

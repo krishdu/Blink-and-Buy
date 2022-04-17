@@ -197,8 +197,7 @@ const ProductDetails = ({ match }) => {
                 Cancel
               </Button>
               <Button onClick={reviewSubmitHandler} color="primary">
-                {" "}
-                Submit{" "}
+                Submit
               </Button>
             </DialogActions>
           </Dialog>

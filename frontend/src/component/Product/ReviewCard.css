@@ -14,7 +14,7 @@
     width: 5vmax;
 }
 
-.reviewCard > p{
+.reviewCard > p {
     color: rgba(0, 0, 0, 0.836);
     font: 600 0.9vmax 'Roboto';
 }
@@ -22,4 +22,14 @@
 .reviewCardComment{
     color: rgba(0, 0, 0, 0.445);
     font: 500 1vmax cursive;
+}
+
+@media screen and (max-width: 600px) {
+    .reviewCard > p {
+        font: 600 3vw 'Roboto';
+    }
+
+    .reviewCardComment {
+        font: 300 5vw 'Roboto';
+    }
 }

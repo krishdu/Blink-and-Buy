@@ -119,5 +119,11 @@ Phase 8: Redux store | product components
                 + On succesful payment go to OrderSucess Component.
         + Added myOrders component using `material-ui data-grid`(to show all orders as a table) package.
         + Added orderDetails Component to view a paticular order.
+    + `Admin Dashboard`
+        + Added a Dashboard component
+            + seperated the page from vertically (left: control menu, right: respective content)
+            + added a sidebar component to hold all menu
+            
+        
             
         
