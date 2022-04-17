@@ -19,7 +19,7 @@
     font: 600 0.9vmax 'Roboto';
 }
 
-.reviewCard > span{
+.reviewCardComment{
     color: rgba(0, 0, 0, 0.445);
     font: 500 1vmax cursive;
 }

@@ -81,6 +81,6 @@ export const getOrderDetails = (orderId) => async (dispatch) => {
  * @description clear all error
  * @param  {} dispatch
  */
-export const clearErrors = async (dispatch) => {
+export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
 };

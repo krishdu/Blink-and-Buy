@@ -26,7 +26,7 @@
   align-items: center;
 }
 
-.productCard > div > Span {
+.numOfReviews {
   margin: 0.5vmax;
   font: 300 0.7vmax "Roboto";
 }
@@ -65,7 +65,7 @@
     font-size: 1.5vmax;
   }
 
-  .productCard > div > span {
+  .numOfReviews {
     margin: 0 0.5vmax;
     font: 300 1vmax "Roboto";
   }

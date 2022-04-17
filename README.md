@@ -92,6 +92,7 @@ Phase 8: Redux store | product components
         + added pagination using `react-js-pagination` package
         + added price filter using `@material-ui/core/Slider`
         + added category and ratings filter
+        + added a submit review Dialog in ProductDetails Component (using `Dialog from material-ui`)
     + `User`
         + Create a component for Login and Register user
         + build redux store for user and define login action
