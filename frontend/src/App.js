@@ -27,6 +27,7 @@ import OrderSuccess from "./component/Cart/OrderSuccess";
 import MyOrders from "./component/Order/MyOrders";
 import OrderDetails from "./component/Order/OrderDetails";
 import Dashboard from "./component/Admin/Dashboard";
+import ProductList from "./component/Admin/ProductList";
 import axios from "axios";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -95,7 +96,19 @@ function App() {
         <ProtectedRoute exact path="/order/:id" component={OrderDetails} />
       </Switch>
 
-      <ProtectedRoute exact path="/admin/dashboard" component={Dashboard} />
+      <ProtectedRoute
+        isAdmin={true}
+        exact
+        path="/admin/dashboard"
+        component={Dashboard}
+      />
+
+      <ProtectedRoute
+        isAdmin={true}
+        exact
+        path="/admin/products"
+        component={ProductList}
+      />
 
       <Footer />
     </Router>

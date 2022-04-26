@@ -81,6 +81,7 @@ const MyOrders = () => {
 
     dispatch(myOrdersAction());
   }, [error, alert, dispatch]);
+
   return (
     <Fragment>
       <MetaData title={`${user.name} - Orders`} />

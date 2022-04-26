@@ -10,6 +10,9 @@ import {
   NEW_REVIEW_REQUEST,
   NEW_REVIEW_SUCCESS,
   NEW_REVIEW_FAIL,
+  ADMIN_PRODUCT_REQUEST,
+  ADMIN_PRODUCT_SUCCESS,
+  ADMIN_PRODUCT_FAIL,
   CLEAR_ERROR,
 } from "../constants/productConstants";
 
@@ -40,6 +43,26 @@ export const getProducts =
       });
     }
   };
+
+/**
+ * @description getProduct action for admin only
+ * @param  {} dispatch
+ * @returns async function handler
+ */
+export const getAdminProductsAction = () => async (dispatch) => {
+  try {
+    dispatch({ type: ADMIN_PRODUCT_REQUEST });
+
+    const { data } = await axios.get("/api/v1/admin/products");
+
+    dispatch({ type: ADMIN_PRODUCT_SUCCESS, payload: data.products });
+  } catch (error) {
+    dispatch({
+      type: ADMIN_PRODUCT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 
 /**
  * @description get product details action

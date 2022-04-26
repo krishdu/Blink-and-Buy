@@ -8,6 +8,7 @@ const {
   createProductReviewAsync,
   getProductReviewsAsync,
   deleteReviewsAsync,
+  getAdminProductsAsync,
 } = require("../controllers/productController");
 
 const {
@@ -29,6 +30,10 @@ router
   .route("/admin/product/:id")
   .put(isAuthenticated, isAuthorizeRoles("admin"), updateProductAsync)
   .delete(isAuthenticated, isAuthorizeRoles("admin"), deleteProductAsync);
+
+router
+  .route("/admin/products")
+  .get(isAuthenticated, isAuthorizeRoles("admin"), getAdminProductsAsync);
 
 router.route("/product/:id").get(getProductDetailsByIdAsync);
 

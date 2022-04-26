@@ -34,6 +34,21 @@ const getAllProductsAsync = asyncWrapper(async (req, res) => {
 });
 
 /**
+ * @description controller method to get all products for admin
+ * @param  {} req
+ * @param  {} res
+ * @returns array of products
+ */
+const getAdminProductsAsync = asyncWrapper(async (req, res) => {
+  const products = await Product.find();
+
+  res.status(200).json({
+    success: true,
+    products,
+  });
+});
+
+/**
  * @description get a single product by Id
  * @param  {} req
  * @param  {} res
@@ -261,4 +276,5 @@ module.exports = {
   createProductReviewAsync,
   getProductReviewsAsync,
   deleteReviewsAsync,
+  getAdminProductsAsync,
 };

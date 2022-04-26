@@ -122,7 +122,10 @@ Phase 8: Redux store | product components
     + `Admin Dashboard`
         + Added a Dashboard component
             + seperated the page from vertically (left: control menu, right: respective content)
-            + added a sidebar component to hold all menu
+            + added a sidebar component to hold all menu (used `TreeView` `TreeItem` from `@material-ui/lab`).
+            + added chart (doughnut, line) from `chartjs` and `react-chartjs-2`
+            + added product list view for admin.
+
             
         
             
