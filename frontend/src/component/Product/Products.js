@@ -9,16 +9,7 @@ import Pagination from "react-js-pagination";
 import Slider from "@material-ui/core/Slider";
 import Typography from "@material-ui/core/Typography";
 import MetaData from "../layout/MetaData";
-
-const categories = [
-  "Laptop",
-  "Phone",
-  "Footware",
-  "Top",
-  "Bottom",
-  "Camera",
-  "Jeans",
-];
+import { categories } from "../../utils/productCategory";
 
 const Products = ({ match }) => {
   const dispatch = useDispatch();
@@ -99,7 +90,7 @@ const Products = ({ match }) => {
               valueLabelDisplay="auto"
               aria-labelledby="range-slider"
               min={0}
-              max={25000}
+              max={250000}
             />
 
             <Typography> Categories </Typography>

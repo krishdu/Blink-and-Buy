@@ -12,21 +12,42 @@ import { DataGrid } from "@material-ui/data-grid";
 import {
   clearErrors,
   getAdminProductsAction,
+  deleteProductAction,
 } from "../../store/actions/productActions";
+import { DELETE_PRODUCT_RESET } from "../../store/constants/productConstants";
 
-const ProductList = () => {
+const ProductList = ({ history }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const { error, products } = useSelector((state) => state.products);
 
+  const { error: deleteError, isDeleted } = useSelector(
+    (state) => state.product
+  );
+
+  const deleteProductHandler = (productId) => {
+    dispatch(deleteProductAction(productId));
+  };
+
   useEffect(() => {
     if (error) {
       alert.error(error);
-      dispatch(clearErrors);
+      dispatch(clearErrors());
+    }
+
+    if (deleteError) {
+      alert.error(deleteError);
+      dispatch(clearErrors());
+    }
+
+    if (isDeleted) {
+      alert.success("Product deleted successfully");
+      history.push("/admin/dashboard");
+      dispatch({ type: DELETE_PRODUCT_RESET });
     }
 
     dispatch(getAdminProductsAction());
-  }, [alert, error, dispatch]);
+  }, [alert, error, deleteError, isDeleted, history, dispatch]);
 
   const columns = [
     { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
@@ -63,7 +84,11 @@ const ProductList = () => {
             <Link to={`/admin/product/${params.getValue(params.id, "id")}`}>
               <EditIcon />
             </Link>
-            <Button>
+            <Button
+              onClick={() =>
+                deleteProductHandler(params.getValue(params.id, "id"))
+              }
+            >
               <DeleteIcon />
             </Button>
           </Fragment>

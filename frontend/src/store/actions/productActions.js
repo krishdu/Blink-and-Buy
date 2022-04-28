@@ -13,6 +13,12 @@ import {
   ADMIN_PRODUCT_REQUEST,
   ADMIN_PRODUCT_SUCCESS,
   ADMIN_PRODUCT_FAIL,
+  NEW_PRODUCT_REQUEST,
+  NEW_PRODUCT_SUCCESS,
+  NEW_PRODUCT_FAIL,
+  DELETE_PRODUCT_REQUEST,
+  DELETE_PRODUCT_SUCCESS,
+  DELETE_PRODUCT_FAIL,
   CLEAR_ERROR,
 } from "../constants/productConstants";
 
@@ -22,7 +28,7 @@ import {
  * @returns async function handler
  */
 export const getProducts =
-  (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
+  (keyword = "", currentPage = 1, price = [0, 250000], category, ratings = 0) =>
   async (dispatch) => {
     try {
       dispatch({ type: ALL_PRODUCT_REQUEST });
@@ -83,6 +89,58 @@ export const getProductDetails = (id) => async (dispatch) => {
   }
 };
 
+/**
+ * @description new product create action
+ * @param  {} productData as Object
+ * @param  {} =>async(dispatch
+ */
+export const newProductCreateAction = (productData) => async (dispatch) => {
+  try {
+    dispatch({ type: NEW_PRODUCT_REQUEST });
+
+    const headerConfig = {
+      headers: { "Content-Type": "application/json" },
+    };
+
+    const { data } = await axios.post(
+      "/api/v1/admin/product/new",
+      productData,
+      headerConfig
+    );
+
+    dispatch({ type: NEW_PRODUCT_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: NEW_PRODUCT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+/**
+ * @description delete product  action
+ * @param  {} productData as Object
+ * @param  {} =>async(dispatch
+ */
+export const deleteProductAction = (productId) => async (dispatch) => {
+  try {
+    dispatch({ type: DELETE_PRODUCT_REQUEST });
+
+    const { data } = await axios.delete(`/api/v1/admin/product/${productId}`);
+
+    dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: data.success });
+  } catch (error) {
+    dispatch({
+      type: DELETE_PRODUCT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+/**
+ * @description new review create action
+ * @param  {} review as Object
+ */
 export const newReviewAction = (review) => async (dispatch) => {
   try {
     dispatch({ type: NEW_REVIEW_REQUEST });

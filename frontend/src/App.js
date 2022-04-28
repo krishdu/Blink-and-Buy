@@ -28,6 +28,7 @@ import MyOrders from "./component/Order/MyOrders";
 import OrderDetails from "./component/Order/OrderDetails";
 import Dashboard from "./component/Admin/Dashboard";
 import ProductList from "./component/Admin/ProductList";
+import NewProduct from "./component/Admin/NewProduct";
 import axios from "axios";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -108,6 +109,13 @@ function App() {
         exact
         path="/admin/products"
         component={ProductList}
+      />
+
+      <ProtectedRoute
+        isAdmin={true}
+        exact
+        path="/admin/product"
+        component={NewProduct}
       />
 
       <Footer />

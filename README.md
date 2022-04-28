@@ -125,6 +125,8 @@ Phase 8: Redux store | product components
             + added a sidebar component to hold all menu (used `TreeView` `TreeItem` from `@material-ui/lab`).
             + added chart (doughnut, line) from `chartjs` and `react-chartjs-2`
             + added product list view for admin.
+            + added product create component.
+            + added delete functionality
 
             
         
