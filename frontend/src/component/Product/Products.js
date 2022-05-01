@@ -16,7 +16,7 @@ const Products = ({ match }) => {
   const alert = useAlert();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [priceFilter, setPriceFilter] = useState([0, 25000]);
+  const [priceFilter, setPriceFilter] = useState([0, 250000]);
   const [category, setCategory] = useState("");
   const [ratings, setRatings] = useState(0);
 
