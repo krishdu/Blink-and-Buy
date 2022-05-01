@@ -120,9 +120,11 @@ const updateOrderStatusAsync = asyncWrapper(async (req, res, next) => {
     );
   }
 
-  order.orderItems.forEach(async (item) => {
-    await updateStock(item.product, item.quantity);
-  });
+  if (req.body.status === "Shipped") {
+    order.orderItems.forEach(async (item) => {
+      await updateStock(item.product, item.quantity);
+    });
+  }
 
   order.orderStatus = req.body.status;
 

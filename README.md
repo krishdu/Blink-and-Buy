@@ -126,7 +126,10 @@ Phase 8: Redux store | product components
             + added chart (doughnut, line) from `chartjs` and `react-chartjs-2`
             + added product list view for admin.
             + added product create component.
-            + added delete functionality
+            + added delete functionality.
+            + added product update component.
+            + added order list component (including create and delete).
+            + added process order component (e.g. shipping to delivered)
 
             
         

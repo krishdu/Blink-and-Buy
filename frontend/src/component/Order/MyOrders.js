@@ -4,7 +4,6 @@ import { DataGrid } from "@material-ui/data-grid";
 import LaunchIcon from "@material-ui/icons/Launch";
 import MetaData from "../layout/MetaData";
 import Loader from "../layout/Loader/Loader";
-import { Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { clearErrors, myOrdersAction } from "../../store/actions/orderAction";
@@ -97,7 +96,7 @@ const MyOrders = () => {
             className="myOrdersTable"
             autoHeight
           />
-          <Typography id="myOrdersHeading"> {user.name}'s Orders </Typography>
+          <p id="myOrdersHeading"> {user.name}'s Orders </p>
         </div>
       )}
     </Fragment>

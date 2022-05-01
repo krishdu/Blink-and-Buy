@@ -19,6 +19,9 @@ import {
   DELETE_PRODUCT_REQUEST,
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_FAIL,
+  UPDATE_PRODUCT_REQUEST,
+  UPDATE_PRODUCT_SUCCESS,
+  UPDATE_PRODUCT_FAIL,
   CLEAR_ERROR,
 } from "../constants/productConstants";
 
@@ -90,9 +93,8 @@ export const getProductDetails = (id) => async (dispatch) => {
 };
 
 /**
- * @description new product create action
+ * @description new product create action --admin
  * @param  {} productData as Object
- * @param  {} =>async(dispatch
  */
 export const newProductCreateAction = (productData) => async (dispatch) => {
   try {
@@ -118,9 +120,36 @@ export const newProductCreateAction = (productData) => async (dispatch) => {
 };
 
 /**
- * @description delete product  action
+ * @description  product update action -- admin
  * @param  {} productData as Object
- * @param  {} =>async(dispatch
+ */
+export const productUpdateAction =
+  (productID, productData) => async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_PRODUCT_REQUEST });
+
+      const headerConfig = {
+        headers: { "Content-Type": "application/json" },
+      };
+
+      const { data } = await axios.put(
+        `/api/v1/admin/product/${productID}`,
+        productData,
+        headerConfig
+      );
+
+      dispatch({ type: UPDATE_PRODUCT_SUCCESS, payload: data.success });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_PRODUCT_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+/**
+ * @description delete product  action -- admin
+ * @param  {} productData as Object
  */
 export const deleteProductAction = (productId) => async (dispatch) => {
   try {
