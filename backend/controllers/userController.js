@@ -289,17 +289,19 @@ const updateUserByAdmin = asyncWrapper(async (req, res, next) => {
     role: req.body.role,
   };
 
-  const user = await User.findByIdAndUpdate(req.params.id, updatedUserDetails, {
-    new: true,
-    runValidators: true,
-    useFindAndModify: false,
-  });
+  let user = await User.findById(req.params.id);
 
   if (!user) {
     return next(
       createCustomError(`user does not exists with id: ${req.params.id}`, 404)
     );
   }
+
+  user = await User.findByIdAndUpdate(req.params.id, updatedUserDetails, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
 
   res.status(200).json({
     success: true,
