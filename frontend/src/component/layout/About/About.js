@@ -15,7 +15,13 @@ const About = () => {
         <div>
           <div>
             <Avatar
-              style={{ width: "10vmax", height: "10vmax", margin: "2vmax 0" }}
+              style={{
+                width: "10vmax",
+                height: "10vmax",
+                margin: "2vmax 0",
+                border: "2px solid gray",
+                borderRadius: "50%",
+              }}
               src="https://avatars.githubusercontent.com/u/37765333?s=400&u=9bce543ca75038162eb8af5785a416622dbc2456&v=4"
               alt="Founder"
             />

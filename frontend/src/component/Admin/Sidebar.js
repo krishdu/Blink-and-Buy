@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../images/logo.JPG";
+import logo from "../../images/logo-circle-1.png";
 import "./css/Sidebar.css";
 import { Link } from "react-router-dom";
 import { TreeView, TreeItem } from "@material-ui/lab";
