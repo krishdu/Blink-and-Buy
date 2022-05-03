@@ -7,7 +7,10 @@ import {
   newReviewReducer,
   newProductReducer,
   productReducer,
+  productReviewsReducer,
+  reviewReducer,
 } from "./reducers/productReducer";
+
 import {
   userReducer,
   ProfileReducer,
@@ -15,7 +18,9 @@ import {
   allUsersReducer,
   userDetailsReducer,
 } from "./reducers/userReducer";
+
 import { cartReducer } from "./reducers/cartReducer";
+
 import {
   allOrdersReducer,
   myOrdersReducer,
@@ -41,6 +46,8 @@ const reducer = combineReducers({
   order: orderReducer,
   allUsers: allUsersReducer,
   userDetails: userDetailsReducer,
+  productReviews: productReviewsReducer,
+  review: reviewReducer,
 });
 
 let initialSate = {

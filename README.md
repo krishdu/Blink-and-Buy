@@ -131,6 +131,7 @@ Phase 8: Redux store | product components
             + added order list component (including create and delete).
             + added process order component (e.g. shipping to delivered)
             + added user list component [including edit(like update role) and delete]
+            + added review list component [delete functionality]
             
 
             

@@ -34,6 +34,10 @@ import OrderList from "./component/Admin/OrderList";
 import ProcessOrder from "./component/Admin/ProcessOrder";
 import UsersList from "./component/Admin/UsersList";
 import UpdateUser from "./component/Admin/UpdateUser";
+import ProductReviews from "./component/Admin/ProductReviews";
+import Contact from "./component/layout/Contact/Contact";
+import About from "./component/layout/About/About";
+import NotFound from "./component/layout/NotFound/NotFound";
 import axios from "axios";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -69,6 +73,10 @@ function App() {
       <Route exact path="/products" component={Products} />
       <Route path="/products/:keyword" component={Products} />
       <Route exact path="/search" component={Search} />
+
+      <Route exact path="/contact" component={Contact} />
+
+      <Route exact path="/about" component={About} />
 
       <ProtectedRoute exact path="/account" component={Profile} />
       <ProtectedRoute exact path="/me/update" component={UpdateProfile} />
@@ -163,6 +171,19 @@ function App() {
         exact
         path="/admin/user/:id"
         component={UpdateUser}
+      />
+
+      <ProtectedRoute
+        isAdmin={true}
+        path="/admin/reviews"
+        exact
+        component={ProductReviews}
+      />
+
+      <Route
+        component={
+          window.location.pathname === "/process/payment" ? null : NotFound
+        }
       />
 
       <Footer />

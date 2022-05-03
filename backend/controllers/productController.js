@@ -305,8 +305,14 @@ const deleteReviewsAsync = asyncWrapper(async (req, res, next) => {
     avgRatings += rev.rating;
   });
 
+  let ratings = 0;
   const numOfReviews = reviews.length;
-  const ratings = avgRatings / numOfReviews;
+  if (numOfReviews === 0) {
+    ratings = 0;
+  } else {
+    ratings = avgRatings / numOfReviews;
+  }
+
   await Product.findByIdAndUpdate(
     productId,
     {
