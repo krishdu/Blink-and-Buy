@@ -98,10 +98,10 @@ const forgotPassword = asyncWrapper(async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 
-  // const resetPasswordURL = `${req.protocol}://${req.get(
-  //   "host"
-  // )}/api/v1/password/reset/${resetToken}`;
-  const resetPasswordURL = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
+  const resetPasswordURL = `${req.protocol}://${req.get(
+    "host"
+  )}/password/reset/${resetToken}`;
+  // const resetPasswordURL = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
   const message = `Your password token is :- \n\n ${resetPasswordURL} \n\n If you have not request this please ignore it.`;
 

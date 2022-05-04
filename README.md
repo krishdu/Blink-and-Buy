@@ -1,4 +1,4 @@
-# BLINK & BUY -  A JS full-stack E-commerce MERN application 
+## BLINK & BUY -  A JS full-stack E-commerce MERN application 
 > Developed this project to get a full-fledged knowledge about JS full-stack application.  
 
 ```
