@@ -19,12 +19,12 @@
 <img alt="GIF" src="https://github.com/krishdu/Blink-and-Buy/blob/master/e-com-blink-buy-v1.gif?raw=true" width="800" height="400"/>
 </p>
 
-> ### Testing payment Gateway
-    > Card number -  such as 4242 4242 4242 4242. Ente the card numbr in the payment form.
-    Expiry Date - Use a valid future date, such as 12/34.
-    CVV - Any 3 digit number
-    > ##### OR 
-[Payment Documentation (👆)](https://stripe.com/docs/testing)
+ ### Testing payment Gateway
++ Card number -  such as 4242 4242 4242 4242. Ente the card numbr in the payment form.
++ Expiry Date - Use a valid future date, such as 12/34.
++ CVV - Any 3 digit number
+> ##### OR 
+[Payment Gateway Documentation (👆)](https://stripe.com/docs/testing)
 
 
 ```
