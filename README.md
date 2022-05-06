@@ -1,6 +1,32 @@
 ## BLINK & BUY -  A JS full-stack E-commerce MERN application 
 > Developed this project to get a full-fledged knowledge about JS full-stack application.  
 
+
++ ### Learnings:
+    + handle `unhandledRejection`, `uncaughtException` in server
+    + error handling using middleware and handle aync task exception by creating async wrapper.
+    + how to use third-party packages (e.g materialui)
+    + how to use local-storage in combination with redux-reducer
+    + use of `switch` in react-router-dom (resolve the conflict of two same path)
+        + i.e. /order/confirm vs /order/:id
+
+| [Live Application (👆)](https://krish-ecommerce-blink-buy.herokuapp.com/) |
+| ----- |
+
+```sh
+```
+<p align="center">
+<img alt="GIF" src="https://github.com/krishdu/Blink-and-Buy/blob/master/e-com-blink-buy-v1.gif?raw=true" width="800" height="400"/>
+</p>
+
+> ### Testing payment Gateway
+    > Card number -  such as 4242 4242 4242 4242. Ente the card numbr in the payment form.
+    Expiry Date - Use a valid future date, such as 12/34.
+    CVV - Any 3 digit number
+    > ##### OR 
+[Payment Documentation (👆)](https://stripe.com/docs/testing)
+
+
 ```
 (MVP)
 ```
@@ -13,13 +39,6 @@
     + add, update, delete any product
     + view sales
 
-+ ### Learnings:
-    + handle `unhandledRejection`, `uncaughtException` in server
-    + error handling using middleware and handle aync task exception by creating async wrapper.
-    + how to use third-party packages (e.g materialui)
-    + how to use local-storage in combination with redux-reducer
-    + use of `switch` in react-router-dom (resolve the conflict of two same path)
-        + i.e. /order/confirm vs /order/:id
 
 ## ✨ Phases ✨
 
