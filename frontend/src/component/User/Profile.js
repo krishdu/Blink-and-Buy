@@ -41,7 +41,7 @@ const Profile = ({ history }) => {
                 <p> {String(user.createdAt).substring(0, 10)} </p>
               </div>
               <div>
-                <Link to="/orders">My Orders</Link>
+                <Link to="/orders/me">My Orders</Link>
                 <Link to="/password/update">Change Password</Link>
               </div>
             </div>
