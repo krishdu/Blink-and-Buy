@@ -15,7 +15,7 @@
 .productCard > img {
   width: 14vmax;
   height: 17vmax;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 0.5vmax;
 }
 
