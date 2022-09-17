@@ -1,6 +1,6 @@
 {
    "version": 1,
-   "name": "Blink-and-buy",
+   "name": "Blink-and-Buy",
    "builds": [
       { "src": "backend/server.js", "use": "@vercel/node" }
    ],
