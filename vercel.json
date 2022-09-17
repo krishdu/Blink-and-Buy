@@ -2,9 +2,9 @@
    "version": 2,
    "name": "Blink-and-Buy",
    "builds": [
-      { "src": "backend/server.js", "use": "@vercel/node" }
+     { "src": "backend/server.js", "use": "@vercel/node" },
+     {"buildCommand": "npm run vercel-postbuild"}
    ],
-   "buildCommand": "npm run vercel-postbuild",
    "routes": [
       { "src": "/(.*)", "dest": "backend/app.js" }
    ]
