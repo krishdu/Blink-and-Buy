@@ -4,6 +4,7 @@
    "builds": [
       { "src": "backend/server.js", "use": "@vercel/node" }
    ],
+   "buildCommand": "npm run vercel-postbuild",
    "routes": [
       { "src": "/(.*)", "dest": "backend/app.js" }
    ]
