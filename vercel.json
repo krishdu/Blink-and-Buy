@@ -5,10 +5,10 @@
      { "src": "./backend/server.js", "use": "@vercel/node" },
      { "src": "./frontend/build", "use": "@vercel/static" }
    ],
-    "rewrites": [
+    "routes": [
     {
-      "source": "/(.*)",
-      "destination": "/backend/app.js"
+      "src": "/(.*)",
+      "dest": "./backend/app.js"
     }
   ]
 }
