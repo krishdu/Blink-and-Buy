@@ -1,13 +1,10 @@
 {
-   "version": 2,
-   "name": "Blink-and-Buy",
    "builds": [
-     { "src": "./backend/server.js", "use": "@vercel/node" },
-     { "src": "./frontend/build", "use": "@vercel/static" }
+     { "src": "./backend/server.js", "use": "@vercel/node" }
    ],
     "routes": [
     {
-      "src": "/(.*)",
+      "src": "/.*",
       "dest": "./backend/app.js"
     }
   ]
