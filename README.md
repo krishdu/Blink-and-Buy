@@ -10,8 +10,8 @@
     + use of `switch` in react-router-dom (resolve the conflict of two same path)
         + i.e. /order/confirm vs /order/:id
 
-| [Live Application (👆)](https://krish-ecommerce-blink-buy.herokuapp.com/) |
-| ----- |
+| [Live Application (👆)-Mirror(1)](https://krish-ecommerce-blink-buy.herokuapp.com/) | [Live Application (👆)-Mirror(2)](https://blink-and-buy.onrender.com/) |
+| ----- | ----- |
 
 ```sh
 ```
